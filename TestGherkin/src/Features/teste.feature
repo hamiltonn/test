@@ -1,3 +1,0 @@
-Scenario:
-Feature:
-When 

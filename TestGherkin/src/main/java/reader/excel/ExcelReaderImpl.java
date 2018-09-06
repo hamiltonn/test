@@ -36,65 +36,66 @@ public class ExcelReaderImpl extends ExcelReader {
 		 System.out.println("Retrieving Sheets using for-each loop");
 		 for(Sheet sheet: book) {
 		     System.out.println("=> " + sheet.getSheetName());
-		 }
+		 
 
-		 /*
-		 // 3. Or you can use a Java 8 forEach with lambda
-		 System.out.println("Retrieving Sheets using Java 8 forEach with lambda");
-		 book.forEach(sheet -> {
-		     System.out.println("=> " + sheet.getSheetName());
-		 });
-		*/
-
-		 /*
-		    ==================================================================
-		    Iterating over all the rows and columns in a Sheet (Multiple ways)
-		    ==================================================================
-		 */
+			 /*
+			 // 3. Or you can use a Java 8 forEach with lambda
+			 System.out.println("Retrieving Sheets using Java 8 forEach with lambda");
+			 book.forEach(sheet -> {
+			     System.out.println("=> " + sheet.getSheetName());
+			 });
+			*/
 	
-		 // Getting the Sheet at index zero
-		 Sheet sheet = book.getSheetAt(0);
+			 /*
+			    ==================================================================
+			    Iterating over all the rows and columns in a Sheet (Multiple ways)
+			    ==================================================================
+			 */
 		
-		 // Create a DataFormatter to format and get each cell's value as String
-		 DataFormatter dataFormatter = new DataFormatter();
-	
-		 // 1. You can obtain a rowIterator and columnIterator and iterate over them
-		 System.out.println("\n\nIterating over Rows and Columns using Iterator\n");
-		 Iterator<Row> rowIterator = sheet.rowIterator();
-		 while (rowIterator.hasNext()) {
-		     Row row = rowIterator.next();
+			 // Getting the Sheet at index zero
+			 //Sheet sheet = book.getSheetAt(0);
+			
+			 // Create a DataFormatter to format and get each cell's value as String
+			 DataFormatter dataFormatter = new DataFormatter();
 		
-		     // Now let's iterate over the columns of the current row
-		     Iterator<Cell> cellIterator = row.cellIterator();
+			 // 1. You can obtain a rowIterator and columnIterator and iterate over them
+			 System.out.println("\n\nIterating over Rows and Columns using Iterator\n");
+			 Iterator<Row> rowIterator = sheet.rowIterator();
+			 while (rowIterator.hasNext()) {
+			     Row row = rowIterator.next();
+			
+			     // Now let's iterate over the columns of the current row
+			     Iterator<Cell> cellIterator = row.cellIterator();
+			
+			     while (cellIterator.hasNext()) {
+			         Cell cell = cellIterator.next();
+			         String cellValue = dataFormatter.formatCellValue(cell);
+			         System.out.print(cellValue + "\t");
+			     }
+			     System.out.println();
+			 }
 		
-		     while (cellIterator.hasNext()) {
-		         Cell cell = cellIterator.next();
-		         String cellValue = dataFormatter.formatCellValue(cell);
-		         System.out.print(cellValue + "\t");
-		     }
-		     System.out.println();
+			 // 2. Or you can use a for-each loop to iterate over the rows and columns
+			 System.out.println("\n\nIterating over Rows and Columns using for-each loop\n");
+			 for (Row row: sheet) {
+			     for(Cell cell: row) {
+			         String cellValue = dataFormatter.formatCellValue(cell);
+			         System.out.print(cellValue + "\t");
+			     }
+			     System.out.println();
+			 }
+		
+			 /*
+			 // 3. Or you can use Java 8 forEach loop with lambda
+			 System.out.println("\n\nIterating over Rows and Columns using Java 8 forEach with lambda\n");
+			 sheet.forEach(row -> {
+			     row.forEach(cell -> {
+			         String cellValue = dataFormatter.formatCellValue(cell);
+			         System.out.print(cellValue + "\t");
+			     });
+			     System.out.println();
+			 });
+			 */
 		 }
-	
-		 // 2. Or you can use a for-each loop to iterate over the rows and columns
-		 System.out.println("\n\nIterating over Rows and Columns using for-each loop\n");
-		 for (Row row: sheet) {
-		     for(Cell cell: row) {
-		         String cellValue = dataFormatter.formatCellValue(cell);
-		         System.out.print(cellValue + "\t");
-		     }
-		     System.out.println();
-		 }
-	
-		 /*
-		 // 3. Or you can use Java 8 forEach loop with lambda
-		 System.out.println("\n\nIterating over Rows and Columns using Java 8 forEach with lambda\n");
-		 sheet.forEach(row -> {
-		     row.forEach(cell -> {
-		         String cellValue = dataFormatter.formatCellValue(cell);
-		         System.out.print(cellValue + "\t");
-		     });
-		     System.out.println();
-		 });
-		 */
-	} 
+	}	 
 }

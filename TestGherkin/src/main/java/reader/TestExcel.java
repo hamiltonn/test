@@ -8,7 +8,7 @@ public class TestExcel {
 		
 		ExcelReaderImpl xls = new ExcelReaderImpl();
 		
-		xls.setFileName("C:\\Users\\Hids\\eclipse-workspace\\TestGherkin\\src\\data\\bdd-data.xlsx");
+		xls.setFileName("C:\\Users\\Hids\\git\\test\\TestGherkin\\src\\data\\bdd-data.xlsx");
 		xls.test();
 	}
 }
